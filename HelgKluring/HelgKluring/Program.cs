@@ -2,14 +2,16 @@
 
 namespace HelgKluring
 {
-    class Program
+    public class Program
     {
+        public static int numberOfDidgits = 0;
+
         static void Main(string[] args)
         {
             while (true) // Ta bort loopen ifall programmet endast ska köras 1 gång
             {
                 RunProgram();
-            }            
+            }
         }
 
         private static void RunProgram()
@@ -22,6 +24,7 @@ namespace HelgKluring
 
             Console.WriteLine("Klicka på valfri knapp för att testa igen");
             Console.ReadKey();
+            numberOfDidgits = 0;
             Console.Clear();
         }
     
@@ -43,17 +46,25 @@ namespace HelgKluring
 
         private static int NumDigits(int input)
         {
-            int numberOfDidgits = 0;
-            if (input == 0) // Ta bort denna If-satsen ifall talet 0 inte ska räknas som en siffra (0 returnerar i så fall 0)
+            numberOfDidgits++;
+            input /= 10;
+            if (input == 0)
             {
-                return 1;
-            }
-
-            while (input != 0)
-            {
-                numberOfDidgits++;
-                input /= 10;
+                return numberOfDidgits;
             }            
+            NumDigits(input);
+            
+            //if (input != 0) // Ta bort denna If-satsen ifall talet 0 inte ska räknas som en siffra (0 returnerar i så fall 0)
+            //{
+            //    return 1;
+            //}
+
+            //while (input != 0) 
+            //{
+            //    numberOfDidgits++;
+            //    input /= 10;
+            //}
+
 
             return numberOfDidgits;
         }
